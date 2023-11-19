@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Dispatch,
@@ -9,15 +9,24 @@ import {
   useState,
 } from "react";
 
-type SettingsType = [boolean, Dispatch<SetStateAction<boolean>>];
+type SettingsType = {
+  onEditMode: boolean;
+  toggleEditMode: () => void;
+};
 
 export const SettingsContext = createContext<SettingsType>(null!);
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
-  const editingState = useState<boolean>(true);
+  const [onEditMode, setEditMode] = useState<boolean>(true);
+  const toggleEditMode = () => setEditMode((s) => !s);
 
   return (
-    <SettingsContext.Provider value={editingState}>
+    <SettingsContext.Provider
+      value={{
+        onEditMode,
+        toggleEditMode,
+      }}
+    >
       {children}
     </SettingsContext.Provider>
   );

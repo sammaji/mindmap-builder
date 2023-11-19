@@ -23,31 +23,23 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { Button } from "@/components/ui/button";
-import {
-  SettingsProvider,
-  useSettings,
-} from "@/components/settings";
+import { SettingsProvider, useSettings } from "@/components/settings";
 
 function BasicNode({ id }: { id: string }) {
-
-  const [isEditing] = useSettings()
-
+  const {onEditMode} = useSettings();
+  
   return (
     <>
       <Handle type="target" position={Position.Top} />
-      <Input className="p-4 w-full h-full" placeholder="untitled" readOnly={!isEditing} />
+      <Input
+        className="p-4 w-full h-full"
+        placeholder="untitled"
+        readOnly={!onEditMode}
+      />
       <Handle type="source" position={Position.Bottom} />
     </>
   );
 }
-
-const initialNodeStyle = {
-  padding: 0,
-};
-
-const id1 = uuid_v4();
-const id2 = uuid_v4();
-const id3 = uuid_v4();
 
 const initialNodes: Node<any, string | undefined>[] = [
   // {
@@ -73,17 +65,12 @@ const initialNodes: Node<any, string | undefined>[] = [
   // },
 ];
 
+const nodeTypes = {basic: BasicNode}
+
 const initialEdges: Edge<any>[] = [];
 
 export default function Page() {
-  const [isEditing, setEditingState] = useSettings();
-
-  const nodeTypes = useMemo(
-    () => ({
-      basic: BasicNode,
-    }),
-    [],
-  );
+  const { onEditMode, toggleEditMode } = useSettings();
 
   const [nodes, setNodes] = useNodesState(initialNodes);
   const [edges, setEdges] = useEdgesState(initialEdges);
@@ -106,48 +93,50 @@ export default function Page() {
 
   return (
     <div className="w-screen h-screen">
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          nodeTypes={nodeTypes}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-        >
-          <Controls />
-          <MiniMap />
-          <Panel position="top-right">
-            <Button
-              onClick={() =>
-                setNodes((nds) => {
-                  const id = uuid_v4();
-                  return applyNodeChanges(
-                    [
-                      {
-                        type: "add",
-                        item: {
-                          id,
-                          type: "basic",
-                          position: { x: 100, y: 100 },
-                          data: { id },
-                        },
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+      >
+        <Controls />
+        <MiniMap />
+        <Panel position="top-right">
+          <Button
+            onClick={() =>
+              setNodes((nds) => {
+                const id = uuid_v4();
+                return applyNodeChanges(
+                  [
+                    {
+                      type: "add",
+                      item: {
+                        id,
+                        type: "basic",
+                        position: { x: 100, y: 100 },
+                        data: { id },
                       },
-                    ],
-                    nds,
-                  );
-                })
-              }
-            >
-              add node
-            </Button>
+                    },
+                  ],
+                  nds,
+                );
+              })
+            }
+          >
+            add node
+          </Button>
 
-            <Button
-              variant={"outline"}
-              onClick={() => setEditingState((s) => !s)}
-            >{isEditing ? "edit" : "read"}</Button>
-          </Panel>
-          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        </ReactFlow>
-      </div>
+          <Button
+            variant={"outline"}
+            onClick={toggleEditMode}
+          >
+            {onEditMode ? "edit" : "read"}
+          </Button>
+        </Panel>
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+      </ReactFlow>
+    </div>
   );
 }

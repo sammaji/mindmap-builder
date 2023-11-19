@@ -24,20 +24,56 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import { Button } from "@/components/ui/button";
 import { SettingsProvider, useSettings } from "@/components/settings";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 function BasicNode({ id }: { id: string }) {
-  const {onEditMode} = useSettings();
-  
+  const { onEditMode } = useSettings();
+
   return (
-    <>
-      <Handle type="target" position={Position.Top} />
-      <Input
-        className="p-4 w-full h-full"
-        placeholder="untitled"
-        readOnly={!onEditMode}
-      />
-      <Handle type="source" position={Position.Bottom} />
-    </>
+    <ContextMenu>
+      <ContextMenuTrigger>
+        <Handle type="target" position={Position.Top} />
+        <Input
+          className="p-4 w-full h-full"
+          placeholder="untitled"
+          readOnly={!onEditMode}
+        />
+        <Handle type="source" position={Position.Bottom} />
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem>
+          Cut <ContextMenuShortcut>⌘X</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          Copy <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          Paste <ContextMenuShortcut>⌘V</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger>More Options</ContextMenuSubTrigger>
+          <ContextMenuSubContent>
+            <ContextMenuItem>Export as JSON</ContextMenuItem>
+            <ContextMenuItem>Export as Image</ContextMenuItem>
+            <ContextMenuItem>Export as SVG</ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSeparator />
+        <ContextMenuItem>
+          Delete <ContextMenuShortcut>⌘D</ContextMenuShortcut>
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
   );
 }
 
@@ -65,15 +101,15 @@ const initialNodes: Node<any, string | undefined>[] = [
   // },
 ];
 
-const nodeTypes = {basic: BasicNode}
+// const initialEdges: Edge<any>[] = [];
 
-const initialEdges: Edge<any>[] = [];
+const nodeTypes = { basic: BasicNode };
 
 export default function Page() {
   const { onEditMode, toggleEditMode } = useSettings();
 
-  const [nodes, setNodes] = useNodesState(initialNodes);
-  const [edges, setEdges] = useEdgesState(initialEdges);
+  const [nodes, setNodes] = useNodesState([]);
+  const [edges, setEdges] = useEdgesState([]);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
@@ -128,10 +164,7 @@ export default function Page() {
             add node
           </Button>
 
-          <Button
-            variant={"outline"}
-            onClick={toggleEditMode}
-          >
+          <Button variant={"outline"} onClick={toggleEditMode}>
             {onEditMode ? "edit" : "read"}
           </Button>
         </Panel>

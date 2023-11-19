@@ -9,13 +9,13 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
   BackgroundVariant,
-  Node, Edge, BezierPathOptions
+  Node, Edge, applyNodeChanges, applyEdgeChanges, NodeChange, EdgeChange
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
 function NodeElement() {
     return (
-        <input className="p-4 w-full h-full border-none outline-none" placeholder='enter a number' />
+        <input className="p-4 w-full h-full border-none outline-none" placeholder='untitled' />
     )
 }
 
@@ -25,20 +25,28 @@ const initialNodeStyle = {
 
 const initialNodes: Node<any, string | undefined>[] = [
     {id: '1', position: {x: 200, y: 200}, style: initialNodeStyle, data: {label: NodeElement()}},
-    {id: '2', position: {x: 200, y: 400}, style: initialNodeStyle, data: {label: NodeElement()}}
+    {id: '2', position: {x: 200, y: 400}, style: initialNodeStyle, data: {label: NodeElement()}},
+    {id: '3', position: {x: 400, y: 400}, style: initialNodeStyle, data: {label: NodeElement()}}
 ]
 
-const initialEdges: Edge<any>[] = [
-    {id: 'e12', source: '1', target: '2' }
-]
+const initialEdges: Edge<any>[] = []
 
 
 
 
 export default function Page() {
 
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+    const [nodes, setNodes] = useNodesState(initialNodes)
+    const [edges, setEdges] = useEdgesState(initialEdges)
+
+    const onNodesChange = useCallback(
+        (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
+        [setNodes],
+      );
+      const onEdgesChange = useCallback(
+        (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+        [setEdges],
+      );
 
     const onConnect = useCallback(
         (params: any) => setEdges((edgs) => addEdge(params, edgs)),

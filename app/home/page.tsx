@@ -1,6 +1,8 @@
-"use client"
+"use client";
 
-import React, { useCallback } from 'react';
+import { v4 as uuid_v4 } from "uuid";
+import { Input } from "@/components/ui/input";
+import React, { useCallback, useMemo } from "react";
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -9,63 +11,129 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
   BackgroundVariant,
-  Node, Edge, applyNodeChanges, applyEdgeChanges, NodeChange, EdgeChange
-} from 'reactflow';
-import 'reactflow/dist/style.css';
+  Node,
+  Edge,
+  applyNodeChanges,
+  applyEdgeChanges,
+  NodeChange,
+  EdgeChange,
+  Panel,
+  Handle,
+  Position,
+} from "reactflow";
+import "reactflow/dist/style.css";
+import { Button } from "@/components/ui/button";
 
-function NodeElement() {
-    return (
-        <input className="p-4 w-full h-full border-none outline-none" placeholder='untitled' />
-    )
+function BasicNode({ id }: { id: string }) {
+  return (
+    <>
+      <Handle type="target" position={Position.Top} />
+      <Input className="p-4 w-full h-full" placeholder="untitled" />
+      <Handle type="source" position={Position.Bottom} />
+    </>
+  );
 }
 
 const initialNodeStyle = {
-    padding: 0
-}
+  padding: 0,
+};
+
+const id1 = uuid_v4();
+const id2 = uuid_v4();
+const id3 = uuid_v4();
 
 const initialNodes: Node<any, string | undefined>[] = [
-    {id: '1', position: {x: 200, y: 200}, style: initialNodeStyle, data: {label: NodeElement()}},
-    {id: '2', position: {x: 200, y: 400}, style: initialNodeStyle, data: {label: NodeElement()}},
-    {id: '3', position: {x: 400, y: 400}, style: initialNodeStyle, data: {label: NodeElement()}}
-]
+  {
+    id: id1,
+    position: { x: 200, y: 200 },
+    type: "basic",
+    style: initialNodeStyle,
+    data: { id: id1 },
+  },
+  {
+    id: id2,
+    position: { x: 200, y: 400 },
+    type: "basic",
+    style: initialNodeStyle,
+    data: { id: id2 },
+  },
+  {
+    id: id3,
+    position: { x: 600, y: 400 },
+    type: "basic",
+    style: initialNodeStyle,
+    data: { id: id3 },
+  },
+];
 
-const initialEdges: Edge<any>[] = []
-
-
-
+const initialEdges: Edge<any>[] = [];
 
 export default function Page() {
+  const nodeTypes = useMemo(
+    () => ({
+      basic: BasicNode,
+    }),
+    [],
+  );
 
-    const [nodes, setNodes] = useNodesState(initialNodes)
-    const [edges, setEdges] = useEdgesState(initialEdges)
+  const [nodes, setNodes] = useNodesState(initialNodes);
+  const [edges, setEdges] = useEdgesState(initialEdges);
 
-    const onNodesChange = useCallback(
-        (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        [setNodes],
-      );
-      const onEdgesChange = useCallback(
-        (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-        [setEdges],
-      );
+  const onNodesChange = useCallback(
+    (changes: NodeChange[]) =>
+      setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes],
+  );
+  const onEdgesChange = useCallback(
+    (changes: EdgeChange[]) =>
+      setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges],
+  );
 
-    const onConnect = useCallback(
-        (params: any) => setEdges((edgs) => addEdge(params, edgs)),
-        [setEdges]
-    )
+  const onConnect = useCallback(
+    (params: any) => setEdges((edgs) => addEdge(params, edgs)),
+    [setEdges],
+  );
 
-    return (
-        <div className="w-screen h-screen">
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
-            >
-              <Controls />
-              <MiniMap />
-              <Background variant={BackgroundVariant.Dots} gap={12} size={1} />  
-            </ReactFlow>
-        </div>
-    )
+  return (
+    <div className="w-screen h-screen">
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+      >
+        <Controls />
+        <MiniMap />
+        <Panel position="top-right">
+          <Button
+            onClick={() =>
+              setNodes((nds) => {
+                const id = uuid_v4();
+                return applyNodeChanges(
+                  [
+                    {
+                      type: "add",
+                      item: {
+                        id,
+                        type: "basic",
+                        position: { x: 100, y: 100 },
+                        data: { id },
+                      },
+                    },
+                  ],
+                  nds,
+                );
+              })
+            }
+          >
+            Add Node
+          </Button>
+        </Panel>
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+      </ReactFlow>
+    </div>
+  );
 }

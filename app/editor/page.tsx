@@ -21,6 +21,7 @@ import ReactFlow, {
   useKeyPress,
   OnEdgeUpdateFunc,
   updateEdge,
+  SelectionMode,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { Button } from "@/components/ui/button";
@@ -143,6 +144,8 @@ export default function Page() {
         onEdgeUpdateStart={onEdgeUpdateStart}
         onEdgeUpdateEnd={onEdgeUpdateEnd}
         proOptions={{ hideAttribution: true }}
+        selectionOnDrag
+        selectionMode={SelectionMode.Partial}
       >
         <Controls />
         {/* <MiniMap /> */}

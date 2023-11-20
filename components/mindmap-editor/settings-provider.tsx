@@ -34,6 +34,7 @@ type SettingsType = {
   onConnect: (params: any) => void;
   createNode: (position?: { x: number; y: number }) => void;
   deleteNode: (id: string) => void;
+  deleteAllNodes: () => void;
 };
 
 export const SettingsContext = createContext<SettingsType>(null!);
@@ -88,6 +89,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const deleteAllNodes = () => setNodes([]);
+
   const [edges, setEdges] = useEdgesState([]);
 
   const onEdgesChange = useCallback(
@@ -115,6 +118,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         onConnect,
         createNode,
         deleteNode,
+        deleteAllNodes,
       }}
     >
       {children}

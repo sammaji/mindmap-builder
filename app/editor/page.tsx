@@ -53,6 +53,26 @@ import { LuBold, LuItalic, LuUnderline } from "react-icons/lu";
 import { ContextMenuItemIndicator } from "@radix-ui/react-context-menu";
 import { cn } from "@/lib/utils";
 
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  Settings,
+  Smile,
+  User,
+} from "lucide-react";
+
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
+
 function BasicNode({ id }: { id: string }) {
   const { onEditMode, deleteNode } = useSettings();
   const [isBold, setBold] = useState<boolean>(false);
@@ -192,6 +212,20 @@ export default function Page() {
     edgeUpdateSuccessful.current = true;
   }, []);
 
+  const [palatteOpen, setPalatteOpen] = React.useState(false);
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "p" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        console.log("ok")
+        setPalatteOpen((open) => !open)
+      }
+    }
+    document.addEventListener("keydown", down)
+    return () => document.removeEventListener("keydown", down)
+  }, [])
+
   return (
     <div className="w-screen h-screen">
       <ReactFlow
@@ -254,7 +288,7 @@ export default function Page() {
                 <AlertDescription>
                   Press{" "}
                   <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                    Shift
+                    Ctrl
                   </kbd>{" "}
                   +
                   <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
@@ -279,6 +313,19 @@ export default function Page() {
           )}
         </Panel>
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+
+        <CommandDialog open={palatteOpen} onOpenChange={setPalatteOpen}>
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>Add node</CommandItem>
+            </CommandGroup>
+            <CommandGroup heading="Delete">
+              <CommandItem>Delete all nodes</CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </CommandDialog>
       </ReactFlow>
     </div>
   );

@@ -20,24 +20,23 @@ import ReactFlow, {
   Panel,
   Handle,
   Position,
+  useKeyPress,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { Button } from "@/components/ui/button";
-import { SettingsProvider, useSettings } from "@/components/settings";
+import { SettingsProvider, useSettings } from "@/components/mindmap-editor";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuShortcut,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import useMousePosition from "@/components/hooks/use-mouse-position";
 
 function BasicNode({ id }: { id: string }) {
-  const { onEditMode } = useSettings();
+  const { onEditMode, deleteNode } = useSettings();
 
   return (
     <ContextMenu>
@@ -48,6 +47,9 @@ function BasicNode({ id }: { id: string }) {
           placeholder="untitled"
           readOnly={!onEditMode}
         />
+        <Handle type="target" position={Position.Top} />
+        <Handle type="target" position={Position.Top} />
+
         <Handle type="source" position={Position.Bottom} />
       </ContextMenuTrigger>
       <ContextMenuContent>
@@ -60,72 +62,36 @@ function BasicNode({ id }: { id: string }) {
         <ContextMenuItem>
           Paste <ContextMenuShortcut>⌘V</ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuSub>
-          <ContextMenuSubTrigger>More Options</ContextMenuSubTrigger>
-          <ContextMenuSubContent>
-            <ContextMenuItem>Export as JSON</ContextMenuItem>
-            <ContextMenuItem>Export as Image</ContextMenuItem>
-            <ContextMenuItem>Export as SVG</ContextMenuItem>
-          </ContextMenuSubContent>
-        </ContextMenuSub>
         <ContextMenuSeparator />
-        <ContextMenuItem>
-          Delete <ContextMenuShortcut>⌘D</ContextMenuShortcut>
+        <ContextMenuItem onClick={() => deleteNode(id)}>
+          Delete <ContextMenuShortcut>del</ContextMenuShortcut>
         </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   );
 }
 
-const initialNodes: Node<any, string | undefined>[] = [
-  // {
-  //   id: id1,
-  //   position: { x: 200, y: 200 },
-  //   type: "basic",
-  //   style: initialNodeStyle,
-  //   data: { id: id1 },
-  // },
-  // {
-  //   id: id2,
-  //   position: { x: 200, y: 400 },
-  //   type: "basic",
-  //   style: initialNodeStyle,
-  //   data: { id: id2 },
-  // },
-  // {
-  //   id: id3,
-  //   position: { x: 600, y: 400 },
-  //   type: "basic",
-  //   style: initialNodeStyle,
-  //   data: { id: id3 },
-  // },
-];
-
-// const initialEdges: Edge<any>[] = [];
-
 const nodeTypes = { basic: BasicNode };
 
 export default function Page() {
-  const { onEditMode, toggleEditMode } = useSettings();
+  const {
+    onEditMode,
+    toggleEditMode,
+    nodes,
+    edges,
+    onNodesChange,
+    onEdgesChange,
+    onConnect,
+    createNode,
+  } = useSettings();
 
-  const [nodes, setNodes] = useNodesState([]);
-  const [edges, setEdges] = useEdgesState([]);
+  const isNPressed = useKeyPress("n");
+  const position = useMousePosition();
 
-  const onNodesChange = useCallback(
-    (changes: NodeChange[]) =>
-      setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes],
-  );
-  const onEdgesChange = useCallback(
-    (changes: EdgeChange[]) =>
-      setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [setEdges],
-  );
-
-  const onConnect = useCallback(
-    (params: any) => setEdges((edgs) => addEdge(params, edgs)),
-    [setEdges],
-  );
+  useEffect(() => {
+    if (!isNPressed) return;
+    createNode(position);
+  }, [isNPressed]);
 
   return (
     <div className="w-screen h-screen">
@@ -140,29 +106,7 @@ export default function Page() {
         <Controls />
         <MiniMap />
         <Panel position="top-right">
-          <Button
-            onClick={() =>
-              setNodes((nds) => {
-                const id = uuid_v4();
-                return applyNodeChanges(
-                  [
-                    {
-                      type: "add",
-                      item: {
-                        id,
-                        type: "basic",
-                        position: { x: 100, y: 100 },
-                        data: { id },
-                      },
-                    },
-                  ],
-                  nds,
-                );
-              })
-            }
-          >
-            add node
-          </Button>
+          <Button onClick={() => createNode()}>add node</Button>
 
           <Button variant={"outline"} onClick={toggleEditMode}>
             {onEditMode ? "edit" : "read"}

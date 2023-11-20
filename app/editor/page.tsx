@@ -27,6 +27,7 @@ import "reactflow/dist/style.css";
 import { Button } from "@/components/ui/button";
 import { useSettings } from "@/components/mindmap-editor";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   ContextMenu,
   ContextMenuContent,
@@ -48,16 +49,39 @@ import {
 import useMousePosition from "@/components/hooks/use-mouse-position";
 import { FiPlus } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
+import { LuBold, LuItalic, LuUnderline } from "react-icons/lu";
+import { ContextMenuItemIndicator } from "@radix-ui/react-context-menu";
+import { cn } from "@/lib/utils";
 
 function BasicNode({ id }: { id: string }) {
   const { onEditMode, deleteNode } = useSettings();
+  const [isBold, setBold] = useState<boolean>(false);
+  const [isItalic, setItalic] = useState<boolean>(false);
+  const [isUnderline, setUnderline] = useState<boolean>(false);
+
+  const styles: Record<string, string> = useMemo(
+    () => ({
+      red: "bg-red-200",
+      green: "bg-green-200",
+      purple: "bg-purple-200",
+      orange: "bg-orange-200",
+      default: "bg-background border-muted"
+    }),
+    [],
+  );
+
+  const [styleKey, setStyleKey] = useState<keyof (typeof styles)>("default")
 
   return (
     <ContextMenu>
       <ContextMenuTrigger>
         <Handle type="target" position={Position.Top} />
         <Input
-          className="p-4 w-full h-full"
+          className={cn("p-4 w-full h-full bg-background", styles[styleKey] , {
+            "font-bold": isBold,
+            italic: isItalic,
+            underline: isUnderline
+          })}
           placeholder="untitled"
           readOnly={!onEditMode}
         />
@@ -67,6 +91,43 @@ function BasicNode({ id }: { id: string }) {
         <Handle type="source" position={Position.Bottom} />
       </ContextMenuTrigger>
       <ContextMenuContent>
+        <ToggleGroup type="single" className="p-2 flex">
+          {Object.keys(styles).map((key, index) => (
+            <ToggleGroupItem
+              key={index}
+              value={key}
+              onClick={() => setStyleKey(key)}
+              className={cn("p-0 h-6 w-6 rounded-full", styles[key])}
+            ></ToggleGroupItem>
+          ))}
+        </ToggleGroup>
+        <ContextMenuSeparator />
+        <ToggleGroup type="multiple">
+          <ToggleGroupItem
+            value="bold"
+            onClick={() => {
+              setBold((x) => !x);
+            }}
+            aria-label="Toggle bold"
+          >
+            <LuBold className="h-4 w-4" />
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="italic"
+            onClick={() => setItalic((x) => !x)}
+            aria-label="Toggle italic"
+          >
+            <LuItalic className="h-4 w-4" />
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="underline"
+            onClick={() => setUnderline((x) => !x)}
+            aria-label="Toggle underline"
+          >
+            <LuUnderline className="h-4 w-4" />
+          </ToggleGroupItem>
+        </ToggleGroup>
+        <ContextMenuSeparator />
         <ContextMenuItem>
           Cut <ContextMenuShortcut>⌘X</ContextMenuShortcut>
         </ContextMenuItem>

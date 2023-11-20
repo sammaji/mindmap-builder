@@ -65,22 +65,22 @@ function BasicNode({ id }: { id: string }) {
       green: "bg-green-200",
       purple: "bg-purple-200",
       orange: "bg-orange-200",
-      default: "bg-background border-muted"
+      default: "bg-background border-muted",
     }),
     [],
   );
 
-  const [styleKey, setStyleKey] = useState<keyof (typeof styles)>("default")
+  const [styleKey, setStyleKey] = useState<keyof typeof styles>("default");
 
   return (
     <ContextMenu>
       <ContextMenuTrigger>
         <Handle type="target" position={Position.Top} />
         <Input
-          className={cn("p-4 w-full h-full bg-background", styles[styleKey] , {
+          className={cn("p-4 w-full h-full bg-background", styles[styleKey], {
             "font-bold": isBold,
             italic: isItalic,
-            underline: isUnderline
+            underline: isUnderline,
           })}
           placeholder="untitled"
           readOnly={!onEditMode}
@@ -209,7 +209,6 @@ export default function Page() {
         selectionMode={SelectionMode.Partial}
       >
         <Controls />
-        {/* <MiniMap /> */}
         <Panel position="top-right">
           <div className="space-x-2">
             <Button onClick={() => createNode()} variant="outline" size="icon">
@@ -249,18 +248,34 @@ export default function Page() {
         </Panel>
         <Panel position="bottom-right">
           {nodes.length === 0 ? (
-            <Alert>
-              <AlertTitle>Quick Tip:</AlertTitle>
-              <AlertDescription>
-                Press{" "}
-                <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                  N
-                </kbd>{" "}
-                to add new nodes quickly.
-              </AlertDescription>
-            </Alert>
+            <div className="space-y-4 pr-4 pb-6">
+              <Alert>
+                <AlertTitle>Pro Tip:</AlertTitle>
+                <AlertDescription>
+                  Press{" "}
+                  <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
+                    Shift
+                  </kbd>{" "}
+                  +
+                  <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
+                    P
+                  </kbd>{" "}
+                  to open command palatte.
+                </AlertDescription>
+              </Alert>
+              <Alert>
+                <AlertTitle>Quick Tip:</AlertTitle>
+                <AlertDescription>
+                  Press{" "}
+                  <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
+                    N
+                  </kbd>{" "}
+                  to add new nodes quickly.
+                </AlertDescription>
+              </Alert>
+            </div>
           ) : (
-            <></>
+            <MiniMap />
           )}
         </Panel>
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

@@ -1,5 +1,8 @@
 "use client";
 
+import ImgPikaIcon from "@/public/pika.png"
+import ImgPikachu from "@/public/pikachu.png"
+
 import { v4 as uuid_v4 } from "uuid";
 import { Input } from "@/components/ui/input";
 import React, {
@@ -91,7 +94,6 @@ function BasicNode({ id }: { id: string }) {
   );
 
   const [styleKey, setStyleKey] = useState<keyof typeof styles>("default");
-
   return (
     <ContextMenu>
       <ContextMenuTrigger>
@@ -182,6 +184,9 @@ export default function Page() {
     deleteAllNodes,
   } = useSettings();
 
+  const [isPikaVisible, setPika] = useState<boolean>(false);
+
+
   const isNPressed = useKeyPress("n");
   const position = useMousePosition();
 
@@ -244,7 +249,8 @@ export default function Page() {
       >
         <Controls />
         <Panel position="top-right">
-          <div className="space-x-2">
+          <div className="flex w-full h-full items-center justify-end gap-2">
+                    <Button variant="outline" size="icon" onClick={() => setPika(x => !x)}><img src={ImgPikaIcon.src} height={16} width={16} /></Button>
             <Button onClick={() => createNode()} variant="outline" size="icon">
               <FiPlus size={18} />
             </Button>
@@ -274,7 +280,9 @@ export default function Page() {
                 </DialogHeader>
               </DialogContent>
             </Dialog>
+
           </div>
+          {isPikaVisible ? <img src={ImgPikachu.src} /> : <></>}
 
           {/* <Button variant={"outline"} onClick={toggleEditMode}>
             {onEditMode ? "edit" : "read"}

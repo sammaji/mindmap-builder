@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRESQL_DATABASE_URL")
+  directUrl = env("POSTGRESQL_DATABASE_URL_DIRECT")
+}
+
+model User {
+  id       String  @id @default(cuid())
+  fname    String
+  lname    String
+  username String? @unique
+  email    String
+
+  mindmaps Mindmap[]
+}
+
+model Mindmap {
+  id   String  @id @default(cuid())
+  name String? @default("untitled")
+  data Json    @default("{\"data\":\"none\"}")
+  uid  String
+  user User    @relation(fields: [uid], references: [id])
+}

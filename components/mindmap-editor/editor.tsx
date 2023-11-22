@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ImgPikaIcon from "@/public/pika.png";
 import ImgPikachu from "@/public/pikachu.png";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -39,18 +39,14 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import { BasicNode } from "./basic-node";
 import "reactflow/dist/style.css";
 
 const nodeTypes = { basic: BasicNode };
 
-export default function Editor() {
+export function Editor() {
   const {
-    onEditMode,
-    toggleEditMode,
     nodes,
     edges,
     setEdges,

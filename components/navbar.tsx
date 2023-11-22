@@ -12,8 +12,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { TypographyP } from "./ui/typography";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
+
+  const { setTheme } = useTheme()
+
   return (
     <div className="px-8 h-[48px] w-screen flex items-center justify-between">
       <div className="space-x-8">
@@ -47,9 +51,9 @@ export default function Navbar() {
               <DropdownMenuSubTrigger>Themes</DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent>
-                  <DropdownMenuItem>Dark</DropdownMenuItem>
-                  <DropdownMenuItem>Light</DropdownMenuItem>
-                  <DropdownMenuItem>System</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
             </DropdownMenuSub>
@@ -64,9 +68,7 @@ export default function Navbar() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <TypographyP placeholder="untitled" className="border-none w-[200px]">
-        Hello world
-      </TypographyP>
+      <TypographyP className="border-none w-[200px]">Hello world</TypographyP>
       <div></div>
     </div>
   );

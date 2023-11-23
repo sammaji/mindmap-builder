@@ -27,15 +27,13 @@ import { SettingsProvider, shortcuts, useSettings } from "./mindmap-editor";
 import { useToast } from "./ui/use-toast";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function Navbar() {
   const { setTheme } = useTheme();
@@ -108,7 +106,9 @@ export default function Navbar() {
             <DropdownMenu>
               <DropdownMenuTrigger>Help</DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>User Manual</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/help/user-manual">User Manual</Link>
+                </DropdownMenuItem>
                 <DialogTrigger asChild>
                   <DropdownMenuItem>Shortcuts Reference</DropdownMenuItem>
                 </DialogTrigger>

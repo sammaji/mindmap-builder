@@ -22,11 +22,11 @@ export function BasicNode({ id }: { id: string }) {
 
   const styles: Record<string, string> = useMemo(
     () => ({
-      red: "bg-red-200 border-red-400",
-      green: "bg-green-200 border-green-400",
-      purple: "bg-purple-200 border-purple-400",
-      orange: "bg-orange-200 border-orange-400",
-      default: "bg-background border-muted",
+      red: "bg-red-200 border-red-400 hover:bg-red-200",
+      green: "bg-green-200 border-green-400 hover:bg-green-200",
+      purple: "bg-purple-200 border-purple-400 hover:bg-purple-200",
+      // orange: "bg-orange-200 border-orange-400 hover:bg-orange-200",
+      default: "bg-background border-[rgba(0,0,0,0.24)]",
     }),
     [],
   );
@@ -57,7 +57,10 @@ export function BasicNode({ id }: { id: string }) {
               key={index}
               value={key}
               onClick={() => setStyleKey(key)}
-              className={cn("p-0 h-6 w-6 rounded-full", styles[key])}
+              className={cn(
+                "p-0 h-6 w-6 rounded-full border-[1px] hover:border-2",
+                styles[key],
+              )}
             ></ToggleGroupItem>
           ))}
         </ToggleGroup>

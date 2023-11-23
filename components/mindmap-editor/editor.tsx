@@ -29,9 +29,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import useMousePosition from "@/components/hooks/use-mouse-position";
+import { CgPokemon } from "react-icons/cg";
 import { FiPlus } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
-
 import {
   CommandDialog,
   CommandEmpty,
@@ -42,16 +42,20 @@ import {
 } from "@/components/ui/command";
 import { BasicNode } from "./basic-node";
 import "reactflow/dist/style.css";
+import Kbd from "@/components/ui/kbd";
 
 const nodeTypes = { basic: BasicNode };
 
 export function Editor() {
   const {
+    setGraphs,
     nodes,
     edges,
-    setEdges,
     onNodesChange,
     onEdgesChange,
+    onEdgeUpdate,
+    onEdgeUpdateStart,
+    onEdgeUpdateEnd,
     onConnect,
     createNode,
     deleteAllNodes,
@@ -66,28 +70,6 @@ export function Editor() {
     if (!isNPressed) return;
     createNode(position);
   }, [isNPressed]);
-
-  const edgeUpdateSuccessful = useRef(true);
-
-  const onEdgeUpdateStart = useCallback(() => {
-    edgeUpdateSuccessful.current = false;
-  }, []);
-
-  const onEdgeUpdate: OnEdgeUpdateFunc<any> = useCallback(
-    (oldEdge, newConnection) => {
-      edgeUpdateSuccessful.current = true;
-      setEdges((els) => updateEdge(oldEdge, newConnection, els));
-    },
-    [],
-  );
-
-  const onEdgeUpdateEnd = useCallback((_: any, edge: Edge<any>) => {
-    if (!edgeUpdateSuccessful.current) {
-      setEdges((eds) => eds.filter((e) => e.id !== edge.id));
-    }
-
-    edgeUpdateSuccessful.current = true;
-  }, []);
 
   const [palatteOpen, setPalatteOpen] = React.useState(false);
 
@@ -117,6 +99,7 @@ export function Editor() {
       proOptions={{ hideAttribution: true }}
       selectionOnDrag
       selectionMode={SelectionMode.Partial}
+      onInit={setGraphs}
     >
       <Controls />
       <Panel position="top-right">
@@ -126,7 +109,7 @@ export function Editor() {
             size="icon"
             onClick={() => setPika((x) => !x)}
           >
-            <img src={ImgPikaIcon.src} height={16} width={16} />
+            <CgPokemon size={18} />
           </Button>
           <Button onClick={() => createNode()} variant="outline" size="icon">
             <FiPlus size={18} />
@@ -170,25 +153,13 @@ export function Editor() {
             <Alert>
               <AlertTitle>Pro Tip:</AlertTitle>
               <AlertDescription>
-                Press{" "}
-                <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                  Ctrl
-                </kbd>{" "}
-                +
-                <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                  P
-                </kbd>{" "}
-                to open command palatte.
+                Press <Kbd>Ctrl</Kbd> + <Kbd>P</Kbd> to open command palatte.
               </AlertDescription>
             </Alert>
             <Alert>
               <AlertTitle>Quick Tip:</AlertTitle>
               <AlertDescription>
-                Press{" "}
-                <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                  N
-                </kbd>{" "}
-                to add new nodes quickly.
+                Press <Kbd>N</Kbd> to add new nodes quickly.
               </AlertDescription>
             </Alert>
           </div>

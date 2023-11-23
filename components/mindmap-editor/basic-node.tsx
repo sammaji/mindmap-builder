@@ -57,7 +57,10 @@ export function BasicNode({ id }: { id: string }) {
               key={index}
               value={key}
               onClick={() => setStyleKey(key)}
-              className={cn("p-0 h-6 w-6 rounded-full border-[1px] hover:border-2", styles[key])}
+              className={cn(
+                "p-0 h-6 w-6 rounded-full border-[1px] hover:border-2",
+                styles[key],
+              )}
             ></ToggleGroupItem>
           ))}
         </ToggleGroup>

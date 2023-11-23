@@ -31,7 +31,6 @@ import {
 import useMousePosition from "@/components/hooks/use-mouse-position";
 import { FiPlus } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
-
 import {
   CommandDialog,
   CommandEmpty,
@@ -49,9 +48,11 @@ export function Editor() {
   const {
     nodes,
     edges,
-    setEdges,
     onNodesChange,
     onEdgesChange,
+    onEdgeUpdate,
+    onEdgeUpdateStart,
+    onEdgeUpdateEnd,
     onConnect,
     createNode,
     deleteAllNodes,
@@ -66,28 +67,6 @@ export function Editor() {
     if (!isNPressed) return;
     createNode(position);
   }, [isNPressed]);
-
-  const edgeUpdateSuccessful = useRef(true);
-
-  const onEdgeUpdateStart = useCallback(() => {
-    edgeUpdateSuccessful.current = false;
-  }, []);
-
-  const onEdgeUpdate: OnEdgeUpdateFunc<any> = useCallback(
-    (oldEdge, newConnection) => {
-      edgeUpdateSuccessful.current = true;
-      setEdges((els) => updateEdge(oldEdge, newConnection, els));
-    },
-    [],
-  );
-
-  const onEdgeUpdateEnd = useCallback((_: any, edge: Edge<any>) => {
-    if (!edgeUpdateSuccessful.current) {
-      setEdges((eds) => eds.filter((e) => e.id !== edge.id));
-    }
-
-    edgeUpdateSuccessful.current = true;
-  }, []);
 
   const [palatteOpen, setPalatteOpen] = React.useState(false);
 

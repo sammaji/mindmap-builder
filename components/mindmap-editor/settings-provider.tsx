@@ -8,6 +8,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useRef,
   useState,
 } from "react";
 import {
@@ -15,26 +16,33 @@ import {
   EdgeChange,
   Node,
   NodeChange,
+  OnEdgeUpdateFunc,
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
+  updateEdge,
   useEdgesState,
   useNodesState,
 } from "reactflow";
 
+type UnitFunction = () => void;
+
 type SettingsType = {
   onEditMode: boolean;
-  toggleEditMode: () => void;
+  toggleEditMode: UnitFunction;
   nodes: Node<any, string | undefined>[];
   edges: Edge<any>[];
   setNodes: Dispatch<SetStateAction<Node<any, string | undefined>[]>>;
   setEdges: Dispatch<SetStateAction<Edge<any>[]>>;
   onNodesChange: (changes: NodeChange[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
+  onEdgeUpdateStart: UnitFunction;
+  onEdgeUpdate: OnEdgeUpdateFunc<any>;
+  onEdgeUpdateEnd: (_: any, edge: Edge<any>) => void;
   onConnect: (params: any) => void;
   createNode: (position?: { x: number; y: number }) => void;
   deleteNode: (id: string) => void;
-  deleteAllNodes: () => void;
+  deleteAllNodes: UnitFunction;
 };
 
 export const SettingsContext = createContext<SettingsType>(null!);
@@ -99,6 +107,28 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     [setEdges],
   );
 
+  const edgeUpdateSuccessful = useRef(true);
+
+  const onEdgeUpdateStart = useCallback(() => {
+    edgeUpdateSuccessful.current = false;
+  }, []);
+
+  const onEdgeUpdate: OnEdgeUpdateFunc<any> = useCallback(
+    (oldEdge, newConnection) => {
+      edgeUpdateSuccessful.current = true;
+      setEdges((els) => updateEdge(oldEdge, newConnection, els));
+    },
+    [],
+  );
+
+  const onEdgeUpdateEnd = useCallback((_: any, edge: Edge<any>) => {
+    if (!edgeUpdateSuccessful.current) {
+      setEdges((eds) => eds.filter((e) => e.id !== edge.id));
+    }
+
+    edgeUpdateSuccessful.current = true;
+  }, []);
+
   const onConnect = useCallback(
     (params: any) => setEdges((edgs) => addEdge(params, edgs)),
     [setEdges],
@@ -115,6 +145,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         setEdges,
         onNodesChange,
         onEdgesChange,
+        onEdgeUpdate,
+        onEdgeUpdateStart,
+        onEdgeUpdateEnd,
         onConnect,
         createNode,
         deleteNode,

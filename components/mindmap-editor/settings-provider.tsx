@@ -17,19 +17,26 @@ import {
   Node,
   NodeChange,
   OnEdgeUpdateFunc,
+  ReactFlowInstance,
+  ReactFlowProvider,
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
   updateEdge,
   useEdgesState,
   useNodesState,
+  useReactFlow,
 } from "reactflow";
+
+const RF_LS_KEY = "react-flow";
 
 type UnitFunction = () => void;
 
 type SettingsType = {
   onEditMode: boolean;
   toggleEditMode: UnitFunction;
+  graphs: ReactFlowInstance | null;
+  setGraphs: Dispatch<SetStateAction<ReactFlowInstance | null>>;
   nodes: Node<any, string | undefined>[];
   edges: Edge<any>[];
   setNodes: Dispatch<SetStateAction<Node<any, string | undefined>[]>>;
@@ -40,6 +47,8 @@ type SettingsType = {
   onEdgeUpdate: OnEdgeUpdateFunc<any>;
   onEdgeUpdateEnd: (_: any, edge: Edge<any>) => void;
   onConnect: (params: any) => void;
+  onSave: UnitFunction;
+  onRestore: UnitFunction;
   createNode: (position?: { x: number; y: number }) => void;
   deleteNode: (id: string) => void;
   deleteAllNodes: UnitFunction;
@@ -48,6 +57,20 @@ type SettingsType = {
 export const SettingsContext = createContext<SettingsType>(null!);
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
+  return (
+    <ReactFlowProvider>
+      <SettingsProviderWithoutReactFlow>
+        {children}
+      </SettingsProviderWithoutReactFlow>
+    </ReactFlowProvider>
+  );
+}
+
+export function SettingsProviderWithoutReactFlow({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [onEditMode, setEditMode] = useState<boolean>(true);
   const toggleEditMode = () => setEditMode((s) => !s);
 
@@ -134,11 +157,38 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     [setEdges],
   );
 
+  const [graphs, setGraphs] = useState<ReactFlowInstance | null>(null);
+  const { setViewport } = useReactFlow();
+
+  const onSave = useCallback(() => {
+    if (graphs) {
+      const flow = graphs.toObject();
+      localStorage.setItem(RF_LS_KEY, JSON.stringify(flow));
+    }
+  }, [graphs]);
+
+  const onRestore = useCallback(() => {
+    const restoreFlow = async () => {
+      const flow = JSON.parse(localStorage.getItem(RF_LS_KEY) ?? "{}");
+
+      if (flow) {
+        const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+        setNodes(flow.nodes ?? []);
+        setEdges(flow.edges ?? []);
+        setViewport({ x, y, zoom });
+      }
+    };
+
+    restoreFlow();
+  }, [setNodes, setEdges, setViewport]);
+
   return (
     <SettingsContext.Provider
       value={{
         onEditMode,
         toggleEditMode,
+        graphs,
+        setGraphs,
         nodes,
         edges,
         setNodes,
@@ -149,6 +199,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         onEdgeUpdateStart,
         onEdgeUpdateEnd,
         onConnect,
+        onSave,
+        onRestore,
         createNode,
         deleteNode,
         deleteAllNodes,

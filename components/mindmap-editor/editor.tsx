@@ -29,6 +29,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import useMousePosition from "@/components/hooks/use-mouse-position";
+import { CgPokemon } from "react-icons/cg";
 import { FiPlus } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
 import {
@@ -46,6 +47,7 @@ const nodeTypes = { basic: BasicNode };
 
 export function Editor() {
   const {
+    setGraphs,
     nodes,
     edges,
     onNodesChange,
@@ -96,6 +98,7 @@ export function Editor() {
       proOptions={{ hideAttribution: true }}
       selectionOnDrag
       selectionMode={SelectionMode.Partial}
+      onInit={setGraphs}
     >
       <Controls />
       <Panel position="top-right">
@@ -105,7 +108,7 @@ export function Editor() {
             size="icon"
             onClick={() => setPika((x) => !x)}
           >
-            <img src={ImgPikaIcon.src} height={16} width={16} />
+            <CgPokemon size={18} />
           </Button>
           <Button onClick={() => createNode()} variant="outline" size="icon">
             <FiPlus size={18} />

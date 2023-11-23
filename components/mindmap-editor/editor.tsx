@@ -42,6 +42,7 @@ import {
 } from "@/components/ui/command";
 import { BasicNode } from "./basic-node";
 import "reactflow/dist/style.css";
+import Kbd from "@/components/ui/kbd";
 
 const nodeTypes = { basic: BasicNode };
 
@@ -152,25 +153,13 @@ export function Editor() {
             <Alert>
               <AlertTitle>Pro Tip:</AlertTitle>
               <AlertDescription>
-                Press{" "}
-                <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                  Ctrl
-                </kbd>{" "}
-                +
-                <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                  P
-                </kbd>{" "}
-                to open command palatte.
+                Press <Kbd>Ctrl</Kbd> + <Kbd>P</Kbd> to open command palatte.
               </AlertDescription>
             </Alert>
             <Alert>
               <AlertTitle>Quick Tip:</AlertTitle>
               <AlertDescription>
-                Press{" "}
-                <kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100">
-                  N
-                </kbd>{" "}
-                to add new nodes quickly.
+                Press <Kbd>N</Kbd> to add new nodes quickly.
               </AlertDescription>
             </Alert>
           </div>

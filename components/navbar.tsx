@@ -100,7 +100,6 @@ export default function Navbar() {
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <DropdownMenu>
@@ -115,8 +114,8 @@ export default function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <TypographyP className="border-none w-[200px]">
-            Hello world
+          <TypographyP className="border-none w-[200px] font-bold">
+            Mindmap Builder
           </TypographyP>
           <div></div>
         </div>

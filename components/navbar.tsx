@@ -12,6 +12,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
+import {
   Table,
   TableBody,
   TableCaption,
@@ -43,12 +55,12 @@ export default function Navbar() {
   return (
     <SettingsProvider>
       <Dialog>
-        <div className="px-8 h-[48px] w-screen flex items-center justify-between">
-          <div className="space-x-8">
-            <DropdownMenu>
-              <DropdownMenuTrigger>File</DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem
+        <div className="px-4 h-[48px] w-screen flex items-center justify-between">
+          <Menubar>
+            <MenubarMenu>
+              <MenubarTrigger>File</MenubarTrigger>
+              <MenubarContent>
+                <MenubarItem
                   onClick={() => {
                     onSave();
                     toast({
@@ -58,62 +70,57 @@ export default function Navbar() {
                   }}
                 >
                   Save
-                </DropdownMenuItem>
-                <DropdownMenuItem>Rename</DropdownMenuItem>
-                <DropdownMenuItem onClick={onRestore}>
-                  Restore Last Save
-                </DropdownMenuItem>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>Import</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuItem>Import from JSON</DropdownMenuItem>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>Export</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuItem>Export as JSON</DropdownMenuItem>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger>View</DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>Themes</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuItem onClick={() => setTheme("dark")}>
-                        Dark
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme("light")}>
-                        Light
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme("system")}>
-                        System
-                      </DropdownMenuItem>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger>Help</DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem asChild>
+                </MenubarItem>
+                <MenubarItem onClick={onRestore}>Restore Last Save</MenubarItem>
+                <MenubarSeparator />
+                <MenubarSub>
+                  <MenubarSubTrigger>Import</MenubarSubTrigger>
+                  <MenubarSubContent>
+                    <MenubarItem>Import from JSON</MenubarItem>
+                  </MenubarSubContent>
+                </MenubarSub>
+                <MenubarSub>
+                  <MenubarSubTrigger>Export</MenubarSubTrigger>
+                  <MenubarSubContent>
+                    <MenubarItem>Export as JSON</MenubarItem>
+                  </MenubarSubContent>
+                </MenubarSub>
+              </MenubarContent>
+            </MenubarMenu>
+
+            <MenubarMenu>
+              <MenubarTrigger>View</MenubarTrigger>
+              <MenubarContent>
+                <MenubarSub>
+                  <MenubarSubTrigger>Themes</MenubarSubTrigger>
+                  <MenubarSubContent>
+                    <MenubarItem onClick={() => setTheme("dark")}>
+                      Dark
+                    </MenubarItem>
+                    <MenubarItem onClick={() => setTheme("light")}>
+                      Light
+                    </MenubarItem>
+                    <MenubarItem onClick={() => setTheme("system")}>
+                      System
+                    </MenubarItem>
+                  </MenubarSubContent>
+                </MenubarSub>
+              </MenubarContent>
+            </MenubarMenu>
+
+            <MenubarMenu>
+              <MenubarTrigger>Help</MenubarTrigger>
+              <MenubarContent>
+                <MenubarItem asChild>
                   <Link href="/help/user-manual">User Manual</Link>
-                </DropdownMenuItem>
+                </MenubarItem>
                 <DialogTrigger asChild>
-                  <DropdownMenuItem>Shortcuts Reference</DropdownMenuItem>
+                  <MenubarItem>Shortcuts Reference</MenubarItem>
                 </DialogTrigger>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+              </MenubarContent>
+            </MenubarMenu>
+          </Menubar>
+
           <TypographyP className="border-none w-[200px] font-bold">
             Mindmap Builder
           </TypographyP>

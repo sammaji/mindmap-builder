@@ -176,6 +176,12 @@ export function Editor() {
           <CommandGroup heading="Suggestions">
             <CommandItem>Add node</CommandItem>
           </CommandGroup>
+          <CommandGroup heading="File">
+            <CommandItem>Save</CommandItem>
+            <CommandItem>Restore last save</CommandItem>
+            <CommandItem>Import &gt; Import from JSON</CommandItem>
+            <CommandItem>Export &gt; Export as JSON</CommandItem>
+          </CommandGroup>
           <CommandGroup heading="Delete">
             <CommandItem>Delete all nodes</CommandItem>
           </CommandGroup>

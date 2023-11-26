@@ -13,6 +13,7 @@ import { Handle, Position } from "reactflow";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { LuBold, LuItalic, LuUnderline } from "react-icons/lu";
+import { HandleGroup } from "./custom-handle";
 
 export function BasicNode({ id }: { id: string }) {
   const { onEditMode, deleteNode } = useSettings();
@@ -35,10 +36,7 @@ export function BasicNode({ id }: { id: string }) {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Handle type="source" className="w-[40px]" id="handle1" position={Position.Top} /> 
-        <Handle type="source" id="handle2" position={Position.Left}/>
-        <Handle type="source" id="handle3" position={Position.Right}/>
-        <Handle type="source" id="handle4" position={Position.Bottom}/>
+        <HandleGroup />
         <Input
           className={cn("p-4 w-full h-full bg-background", styles[styleKey], {
             "font-bold": isBold,

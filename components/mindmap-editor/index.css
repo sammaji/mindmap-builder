@@ -1,0 +1,8 @@
+.react-flow__handle {
+    background-color: rgba(0,0,0,0.48);
+}
+
+.react-flow__handle:hover, .react-flow__handle:active, .react-flow__handle:focus {
+    background-color: black;
+    outline: 2px #60a5fa solid
+}

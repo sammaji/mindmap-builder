@@ -35,7 +35,10 @@ export function BasicNode({ id }: { id: string }) {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Handle type="target" position={Position.Top} />
+        <Handle type="source" className="w-[40px]" id="handle1" position={Position.Top} /> 
+        <Handle type="source" id="handle2" position={Position.Left}/>
+        <Handle type="source" id="handle3" position={Position.Right}/>
+        <Handle type="source" id="handle4" position={Position.Bottom}/>
         <Input
           className={cn("p-4 w-full h-full bg-background", styles[styleKey], {
             "font-bold": isBold,
@@ -45,10 +48,6 @@ export function BasicNode({ id }: { id: string }) {
           placeholder="untitled"
           readOnly={!onEditMode}
         />
-        <Handle type="target" position={Position.Top} />
-        <Handle type="target" position={Position.Top} />
-
-        <Handle type="source" position={Position.Bottom} />
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ToggleGroup type="single" className="p-2 flex">

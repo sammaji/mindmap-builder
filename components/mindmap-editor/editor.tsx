@@ -13,6 +13,7 @@ import ReactFlow, {
   OnEdgeUpdateFunc,
   updateEdge,
   SelectionMode,
+  ConnectionMode,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { Button } from "@/components/ui/button";
@@ -100,6 +101,7 @@ export function Editor() {
       selectionOnDrag
       selectionMode={SelectionMode.Partial}
       onInit={setGraphs}
+      connectionMode={ConnectionMode.Loose}
     >
       <Controls />
       <Panel position="top-right">

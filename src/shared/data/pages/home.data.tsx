@@ -39,25 +39,17 @@ import gasImg from "~/assets/images/gas.jpg";
 
 // Hero data on Home page *******************
 export const heroHome: HeroProps = {
-  title: (
-    <>
-      Build Mindmaps With Ease{" "}
-      {/* <span className="hidden md:inline">starts a website using</span>{" "}
-      <span>Next.js</span> +{" "}
-      <span className="sm:whitespace-nowrap">Tailwind CSS</span> */}
-    </>
-  ),
+  title: "Build Mindmaps With Ease",
   subtitle: (
     <>
       <span className="hidden md:inline">
         <span className="font-semibold underline decoration-primary-600 decoration-wavy decoration-1 underline-offset-2">
-          TailNext
+          Mindmaply
         </span>{" "}
-        is a production ready template to start your new website using{" "}
-        <em>Next.js</em> + <em>Tailwind CSS</em>.
-      </span>{" "}
-      It has been designed following Best Practices, SEO, Accessibility, Dark
-      Mode, great Page Speed, image optimization.
+        helps you build <em>mindmaps</em> and <em>flowcharts</em> with ease.
+        From collaborative brainstorming sessions to project planning, our
+        platform is designed to elevate your thinking process.
+      </span>
     </>
   ),
   callToAction: {
@@ -72,7 +64,7 @@ export const heroHome: HeroProps = {
   },
   image: {
     src: heroImg,
-    alt: "Hero TailNext",
+    alt: "Hero Mindmaply",
   },
 };
 
@@ -112,7 +104,7 @@ export const featuresHome: FeaturesProps = {
   header: {
     title: (
       <>
-        What you get with <span className="whitespace-nowrap">TailNext</span>
+        What you get with <span className="whitespace-nowrap">Mindmaply</span>
       </>
     ),
     subtitle:
@@ -300,7 +292,7 @@ export const testimonialsHome: TestimonialsProps = {
     {
       name: "Tayla Kirsten",
       job: "Marketing Manager",
-      testimonial: `I'm impressed by the speed and performance of these templates. My website now loads in the blink of an eye, significantly enhancing my visitors' experience. Thanks to TailNext, my online business is thriving.`,
+      testimonial: `I'm impressed by the speed and performance of these templates. My website now loads in the blink of an eye, significantly enhancing my visitors' experience. Thanks to Mindmaply, my online business is thriving.`,
       image: {
         src: "https://images.unsplash.com/photo-1619734086067-24bf8889ea7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
         alt: "Tayla Kirsten",
@@ -310,7 +302,7 @@ export const testimonialsHome: TestimonialsProps = {
     {
       name: "Silver Jordan",
       job: "Senior Marketer",
-      testimonial: `I had never found it so easy to customize a website. TailNext's templates are incredibly flexible, and with Tailwind CSS, I've managed to give my website the look and feel I always wanted. Highly recommended!`,
+      testimonial: `I had never found it so easy to customize a website. Mindmaply's templates are incredibly flexible, and with Tailwind CSS, I've managed to give my website the look and feel I always wanted. Highly recommended!`,
       image: {
         src: "https://images.unsplash.com/photo-1565049786474-1dea82a8b995?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
         alt: "Silver Jordan",
@@ -320,7 +312,7 @@ export const testimonialsHome: TestimonialsProps = {
     {
       name: "Kelsey Arden",
       job: "Co-Founder & CEO",
-      testimonial: `As a beginner in web development, I really needed clear guidance. Tailnext made it possible. I was able to install and customize my website seamlessly, and I'm thrilled with the results!`,
+      testimonial: `As a beginner in web development, I really needed clear guidance. Mindmaply made it possible. I was able to install and customize my website seamlessly, and I'm thrilled with the results!`,
       image: {
         src: "https://images.unsplash.com/photo-1659057106920-da022cfbc0cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
         alt: "Kelsey Arden",
@@ -350,7 +342,7 @@ export const testimonialsHome: TestimonialsProps = {
     {
       name: "Lisa Gordon",
       job: "Project Manager",
-      testimonial: `Their templates are not only stunning but also user-friendly. The support I received from their community has been exceptional. I'm proud to say that I've built my dream website with TailNext.`,
+      testimonial: `Their templates are not only stunning but also user-friendly. The support I received from their community has been exceptional. I'm proud to say that I've built my dream website with Mindmaply.`,
       image: {
         src: "https://images.unsplash.com/photo-1665984867752-6370ab5ae35e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
         alt: "Lisa Gordon",
@@ -619,7 +611,7 @@ export const contactHome: ContactProps = {
     },
     {
       title: "Contact",
-      description: ["Mobile: +1 (123) 456-7890", "Mail: tailnext@gmail.com"],
+      description: ["Mobile: +1 (123) 456-7890", "Mail: Mindmaply@gmail.com"],
       icon: IconPhoneCall,
     },
     {
@@ -667,14 +659,14 @@ export const callToAction2Home: CallToActionProps = {
     "Aliquam sodales porttitor lacus ac tristique. Etiam posuere elit at leo feugiat sodales. Sed ac mauris quis sem tempor condimentum non at metus.",
   callToAction: {
     text: "Get template",
-    href: "https://github.com/onwidget/tailnext",
+    href: "https://github.com/onwidget/Mindmaply",
     icon: IconDownload,
   },
   items: [
     {
       title: "Get template",
       description: "Aliquam sodales est lectus, quis.",
-      href: "https://github.com/onwidget/tailnext",
+      href: "https://github.com/onwidget/Mindmaply",
     },
     {
       title: "Learn more",

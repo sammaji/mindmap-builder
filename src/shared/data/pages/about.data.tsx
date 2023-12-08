@@ -53,7 +53,7 @@ export const hero2About: HeroProps = {
   },
   image: {
     src: hero2Img,
-    alt: "Hero TailNext",
+    alt: "Hero Mindmaply",
   },
 };
 
@@ -147,7 +147,7 @@ export const featuresFourAboutTwo: FeaturesProps = {
 export const stepsAbout: StepsProps = {
   id: "steps-on-about",
   header: {
-    title: "History of TailNext",
+    title: "History of Mindmaply",
     subtitle:
       "Duis sit amet magna et sapien cursus fermentum. Curabitur ac mauris non magna condimentum scelerisque. Aliquam nunc ipsum, semper ac scelerisque sit amet, pulvinar vitae libero.",
     tagline: "Company History",
@@ -608,7 +608,7 @@ export const contactAbout: ContactProps = {
     },
     {
       title: "Contact",
-      description: ["Mobile: +1 (123) 456-7890", "Mail: tailnext@gmail.com"],
+      description: ["Mobile: +1 (123) 456-7890", "Mail: Mindmaply@gmail.com"],
       icon: IconPhoneCall,
     },
     {

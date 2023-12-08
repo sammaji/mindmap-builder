@@ -2,17 +2,15 @@ import Image from "next/image";
 import { HeroProps } from "~/shared/types";
 import CTA from "../common/CTA";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const data = {
   title: "Build Mindmaps With Ease"
 }
 
 const Hero = ({
-  title,
   subtitle,
   tagline,
-  callToAction,
-  callToAction2,
   image,
 }: HeroProps) => {
   return (
@@ -37,10 +35,8 @@ const Hero = ({
                 </p>
               )}
               <div className="flex max-w-none flex-col flex-nowrap gap-4 px-4 sm:flex-row sm:justify-center">
-                  <Button size="xl">Get Started </Button>
-                {callToAction2 && (
-                  <CTA callToAction={callToAction2} linkClass="btn" />
-                )}
+                  <Link href="/editor"><Button size="xl">Get Started</Button></Link>
+                  <Button size="xl" variant="outline">Learn More </Button>
               </div>
             </div>
           </div>

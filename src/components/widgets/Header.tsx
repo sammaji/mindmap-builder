@@ -163,17 +163,13 @@ const Header = () => {
                 <IconRss className="h-5 w-5" />
               </Link>
             )}
-            {actions && actions.length > 0 && (
+            {/* {actions && actions.length > 0 && (
               <div className="ml-4 flex w-max flex-wrap justify-end">
                 {actions.map((callToAction, index) => (
-                  <CTA
-                    key={`item-action-${index}`}
-                    callToAction={callToAction as CallToAction}
-                    linkClass="btn btn-primary m-1 py-2 px-5 text-sm font-semibold shadow-none md:px-6"
-                  />
+                  
                 ))}
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

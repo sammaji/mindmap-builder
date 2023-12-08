@@ -8,6 +8,8 @@ import {
 } from "@tabler/icons-react";
 import { AnnouncementProps, FooterProps, HeaderProps } from "../types";
 
+import Script from "next/script";
+
 // Announcement data
 export const announcementData: AnnouncementProps = {
   title: "NEW",
@@ -70,7 +72,7 @@ export const headerData: HeaderProps = {
   actions: [
     {
       text: "Download",
-      href: "https://github.com/onwidget/tailnext",
+      href: "https://github.com/onwidget/Mindmaply",
       targetBlank: true,
     },
   ],
@@ -82,7 +84,7 @@ export const headerData: HeaderProps = {
 
 // Footer data
 export const footerData: FooterProps = {
-  title: "TailNext",
+  title: "Mindmaply",
   links: [
     {
       label: "Terms & Conditions",
@@ -207,7 +209,7 @@ export const footerData: FooterProps = {
     {
       label: "Github",
       icon: IconBrandGithub,
-      href: "https://github.com/onwidget/tailnext",
+      href: "https://github.com/onwidget/Mindmaply",
     },
   ],
   footNote: (
@@ -260,21 +262,18 @@ export const footerData2: FooterProps = {
     {
       label: "Github",
       icon: IconBrandGithub,
-      href: "https://github.com/onwidget/tailnext",
+      href: "https://github.com/onwidget/Mindmaply",
     },
   ],
   footNote: (
-    <div className="mr-4 text-sm">
-      <span className="float-left mr-1.5 h-5 w-5 rounded-sm bg-[url(https://onwidget.com/favicon/favicon-32x32.png)] bg-cover md:-mt-0.5 md:h-6 md:w-6"></span>
-      Made by{" "}
+    <div className="mr-4 text-sm text-slate-900 dark:text-gray-200">
+      Made with ❣️ by&nbsp;
       <a
         className="font-semibold text-slate-900 dark:text-gray-200 hover:text-blue-600 hover:underline dark:hover:text-blue-600"
-        href="https://onwidget.com/"
+        href="https://twitter.com/sammaji15"
       >
-        {" "}
-        onWidget
-      </a>{" "}
-      · All rights reserved.
+        Samyabrata Maji
+      </a>
     </div>
   ),
 };

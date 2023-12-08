@@ -28,7 +28,7 @@ import {
   testimonialsHome,
 } from "~/shared/data/pages/home.data";
 
-import "../globals.css"
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: SITE.title,
@@ -38,7 +38,7 @@ export default function Page() {
   return (
     <>
       <Hero {...heroHome} />
-      <SocialProof {...socialProofHome} />
+      {/* <SocialProof {...socialProofHome} /> */}
       <Features {...featuresHome} />
       <Content {...contentHomeOne} />
       <Content {...contentHomeTwo} />

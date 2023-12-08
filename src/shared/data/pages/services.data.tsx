@@ -28,12 +28,12 @@ export const heroServices: HeroProps = {
     "Donec aliquam pharetra nibh quis vestibulum. Praesent hendrerit sem at lacus ullamcorper egestas. Morbi lacinia ipsum in nulla gravida, ac sagittis turpis pretium. ",
   callToAction: {
     text: "Start Exploring",
-    href: "https://github.com/onwidget/tailnext",
+    href: "https://github.com/onwidget/Mindmaply",
     targetBlank: true,
   },
   image: {
     src: heroImg,
-    alt: "Hero TailNext",
+    alt: "Hero Mindmaply",
   },
 };
 
@@ -158,7 +158,7 @@ export const features4Services: FeaturesProps = {
   },
   image: {
     src: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80",
-    alt: "Hero TailNext",
+    alt: "Hero Mindmaply",
   },
   items: [
     {
@@ -213,7 +213,7 @@ export const testimonialsServices: TestimonialsProps = {
     {
       name: "Silver Jordan",
       job: "Senior Marketer",
-      testimonial: `I had never found it so easy to customize a website. TailNext's templates are incredibly flexible, and with Tailwind CSS, I've managed to give my website the look and feel I always wanted. Highly recommended!`,
+      testimonial: `I had never found it so easy to customize a website. Mindmaply's templates are incredibly flexible, and with Tailwind CSS, I've managed to give my website the look and feel I always wanted. Highly recommended!`,
       image: {
         src: "https://images.unsplash.com/photo-1565049786474-1dea82a8b995?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
         alt: "Silver Jordan",
@@ -233,7 +233,7 @@ export const testimonialsServices: TestimonialsProps = {
     {
       name: "Lisa Gordon",
       job: "Project Manager",
-      testimonial: `Their templates are not only stunning but also user-friendly. The support I received from their community has been exceptional. I'm proud to say that I've built my dream website with TailNext.`,
+      testimonial: `Their templates are not only stunning but also user-friendly. The support I received from their community has been exceptional. I'm proud to say that I've built my dream website with Mindmaply.`,
       image: {
         src: "https://images.unsplash.com/photo-1665984867752-6370ab5ae35e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
         alt: "Lisa Gordon",

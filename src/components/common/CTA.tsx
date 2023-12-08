@@ -34,8 +34,8 @@ const CTA = ({
                   )}
                 />
               )}
-              {text} <span className="text-[rgba(225,225,225,0.75)]">&nbsp;— It&apos;s Free</span>
-            </Link>
+              {text}
+              </Link>
           ) : (
             <Link
               className={twMerge(

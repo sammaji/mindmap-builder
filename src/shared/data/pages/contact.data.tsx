@@ -41,7 +41,7 @@ export const contact2Contact: ContactProps = {
     },
     {
       title: "Contact",
-      description: ["Mobile: +1 (123) 456-7890", "Mail: tailnext@gmail.com"],
+      description: ["Mobile: +1 (123) 456-7890", "Mail: Mindmaply@gmail.com"],
       icon: IconPhoneCall,
     },
     {

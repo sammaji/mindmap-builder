@@ -38,11 +38,11 @@ export const pricingPricing: PricingProps = {
       items: [
         {
           description:
-            "Access to a selection of professionally designed website templates.",
+            "Unlimited public projects.",
         },
         {
           description:
-            "Email support to assist you with any questions or issues.",
+            "Upto 5 private projects.",
         },
         {
           description:

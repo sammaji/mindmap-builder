@@ -1,16 +1,16 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import fs from 'fs';
-import path from 'path';
-import md from 'markdown-it';
+import fs from "fs";
+import path from "path";
+import md from "markdown-it";
 
 export const metadata: Metadata = {
-  title: 'Terms and conditions',
+  title: "Terms and conditions",
 };
 
 const Page = () => {
-  const filePath = path.join(process.cwd(), 'src/content/terms/terms.md');
-  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const filePath = path.join(process.cwd(), "src/content/terms/terms.md");
+  const fileContent = fs.readFileSync(filePath, "utf8");
 
   return (
     <div

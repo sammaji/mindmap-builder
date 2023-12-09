@@ -5,14 +5,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const data = {
-  title: "Build Mindmaps With Ease"
-}
+  title: "Build Mindmaps With Ease",
+};
 
-const Hero = ({
-  subtitle,
-  tagline,
-  image,
-}: HeroProps) => {
+const Hero = ({ subtitle, tagline, image }: HeroProps) => {
   return (
     <section id="heroOne">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -35,8 +31,12 @@ const Hero = ({
                 </p>
               )}
               <div className="flex max-w-none flex-col flex-nowrap gap-4 px-4 sm:flex-row sm:justify-center">
-                  <Link href="/editor"><Button size="xl">Get Started</Button></Link>
-                  <Button size="xl" variant="outline">Learn More </Button>
+                <Link href="/editor">
+                  <Button size="xl">Get Started</Button>
+                </Link>
+                <Button size="xl" variant="outline">
+                  Learn More{" "}
+                </Button>
               </div>
             </div>
           </div>

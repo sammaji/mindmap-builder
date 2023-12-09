@@ -35,7 +35,7 @@ const CTA = ({
                 />
               )}
               {text}
-              </Link>
+            </Link>
           ) : (
             <Link
               className={twMerge(

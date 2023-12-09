@@ -37,12 +37,10 @@ export const pricingPricing: PricingProps = {
       period: "per month",
       items: [
         {
-          description:
-            "Unlimited public projects.",
+          description: "Unlimited public projects.",
         },
         {
-          description:
-            "Upto 5 private projects.",
+          description: "Upto 5 private projects.",
         },
         {
           description:

@@ -9,19 +9,19 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
+  id       String    @id @default(cuid())
   fname    String
   lname    String
-  username String? @unique
+  username String?   @unique
   email    String
-
   mindmaps Mindmap[]
 }
 
 model Mindmap {
-  id   String  @id @default(cuid())
-  name String? @default("untitled")
-  data Json    @default("{\"data\":\"none\"}")
-  uid  String
-  user User    @relation(fields: [uid], references: [id])
+  id     String  @id @default(cuid())
+  title  String? @default("untitled")
+  data   Json    @default("{\"data\":\"none\"}")
+  uid    String
+  user   User    @relation(fields: [uid], references: [id])
+  public Boolean @default(false)
 }

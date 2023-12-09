@@ -1,14 +1,14 @@
-import md from 'markdown-it';
-import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import md from "markdown-it";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
-import { findPostBySlug, findLatestPosts } from '~/utils/posts';
+import { findPostBySlug, findLatestPosts } from "~/utils/posts";
 
 export const dynamicParams = false;
 
 const getFormattedDate = (date) => date;
 
-export async function generateMetadata({ params}) {
+export async function generateMetadata({ params }) {
   const post = await findPostBySlug(params.slug);
   if (!post) {
     return notFound();
@@ -30,10 +30,12 @@ export default async function Page({ params }) {
   return (
     <section className="mx-auto py-8 sm:py-16 lg:py-20">
       <article>
-        <header className={post.image ? 'text-center' : ''}>
+        <header className={post.image ? "text-center" : ""}>
           <p className="mx-auto max-w-3xl px-4 sm:px-6">
-            <time dateTime={post.publishDate}>{getFormattedDate(post.publishDate)}</time> ~{' '}
-            {/* {Math.ceil(post.readingTime)} min read */}
+            <time dateTime={post.publishDate}>
+              {getFormattedDate(post.publishDate)}
+            </time>{" "}
+            ~ {/* {Math.ceil(post.readingTime)} min read */}
           </p>
           <h1 className="leading-tighter font-heading mx-auto mb-8 max-w-3xl px-4 text-4xl font-bold tracking-tighter sm:px-6 md:text-5xl">
             {post.title}

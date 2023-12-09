@@ -18,8 +18,8 @@ const Headline = ({
               position === "left"
                 ? "text-left ml-0"
                 : position === "right"
-                  ? "text-right mr-0"
-                  : "text-center"
+                ? "text-right mr-0"
+                : "text-center"
             }`,
             containerClass,
           )}
@@ -46,8 +46,8 @@ const Headline = ({
                   position === "left"
                     ? "text-left ml-0"
                     : position === "right"
-                      ? "text-right mr-0"
-                      : "text-center"
+                    ? "text-right mr-0"
+                    : "text-center"
                 }`,
                 subtitleClass,
               )}

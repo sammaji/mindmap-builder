@@ -171,8 +171,8 @@ const Form = ({
             btnPosition === "left"
               ? "text-left"
               : btnPosition === "right"
-                ? "text-right"
-                : "text-center"
+              ? "text-right"
+              : "text-center"
           }`}
         >
           <button

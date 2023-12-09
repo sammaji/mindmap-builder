@@ -1,5 +1,5 @@
-import { StaticImageData } from 'next/image';
-import { ReactElement } from 'react';
+import { StaticImageData } from "next/image";
+import { ReactElement } from "react";
 
 interface Widget {
   id?: string;
@@ -20,7 +20,7 @@ interface Header {
   title?: string | ReactElement;
   subtitle?: string | ReactElement;
   tagline?: string;
-  position?: 'center' | 'right' | 'left';
+  position?: "center" | "right" | "left";
 }
 
 interface HeadlineProps {
@@ -30,7 +30,7 @@ interface HeadlineProps {
   subtitleClass?: string;
 }
 
-type Icon = React.ComponentType<React.ComponentProps<'svg'>>;
+type Icon = React.ComponentType<React.ComponentProps<"svg">>;
 
 interface CallToAction {
   text?: string;
@@ -48,7 +48,7 @@ interface LinkOrButton {
 
 interface Button {
   title: string;
-  type: 'button' | 'submit' | 'reset';
+  type: "button" | "submit" | "reset";
 }
 
 interface Input {
@@ -96,7 +96,7 @@ interface FormProps {
   textarea?: Textarea;
   checkboxes?: Array<Checkbox>;
   btn: Button;
-  btnPosition?: 'center' | 'right' | 'left';
+  btnPosition?: "center" | "right" | "left";
   containerClass?: string;
 }
 
@@ -351,5 +351,5 @@ interface HeaderProps {
   isSticky?: boolean;
   showToggleTheme?: boolean;
   showRssFeed?: boolean;
-  position?: 'center' | 'right' | 'left';
+  position?: "center" | "right" | "left";
 }

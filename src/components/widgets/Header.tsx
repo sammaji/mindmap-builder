@@ -85,8 +85,8 @@ const Header = () => {
             position === "right"
               ? "justify-end"
               : position === "left"
-                ? "justify-start"
-                : "justify-center"
+              ? "justify-start"
+              : "justify-center"
           } w-auto overflow-y-auto dark:text-slate-200 md:mx-5 md:flex md:h-auto md:items-center md:overflow-visible`}
           aria-label="Main navigation"
         >

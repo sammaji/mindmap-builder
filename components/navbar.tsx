@@ -122,7 +122,7 @@ export default function Navbar() {
           </Menubar>
 
           <TypographyP className="border-none w-[200px] font-bold">
-            Mindmap Builder
+            Mindmaply
           </TypographyP>
           <div></div>
         </div>

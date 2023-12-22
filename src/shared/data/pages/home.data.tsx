@@ -108,69 +108,69 @@ export const featuresHome: FeaturesProps = {
       </>
     ),
     subtitle:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.",
+      "We offer a rich set of features.",
     tagline: "Features",
   },
   items: [
     {
-      title: "Next.Js + Tailwind CSS Integration",
+      title: "Drag-and-Drop Functionality",
       description:
-        "A seamless integration between two great frameworks that offer high productivity, performance and versatility.",
+        "Build your mind maps effortlessly with our intuitive drag-and-drop interface. Rearrange, connect, and organize your thoughts with unparalleled ease.",
       icon: IconBrandTailwind,
-      callToAction: {
-        text: "Discover now",
-        href: "/",
-      },
+      // callToAction: {
+      //   text: "Discover now",
+      //   href: "/docs",
+      // },
     },
     {
-      title: "Ready-to-use Components",
+      title: "Export and Share",
       description:
-        "Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...",
+        "Take your mind maps wherever you go. Export your creations in various formats, including PDF and image files, ensuring seamless sharing and integration with your presentations and documents.",
       icon: IconComponents,
-      callToAction: {
-        text: "Discover now",
-        href: "/",
-      },
+      // callToAction: {
+      //   text: "Discover now",
+      //   href: "/",
+      // },
     },
     {
-      title: "Best Practices",
+      title: "Templates for Every Need",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla.",
+        "Whether you're planning a project, organizing your thoughts, or outlining a presentation, MindMaply offers a range of templates to jumpstart your creativity.",
       icon: IconListCheck,
-      callToAction: {
-        text: "Discover now",
-        href: "/",
-      },
+      // callToAction: {
+      //   text: "Discover now",
+      //   href: "/",
+      // },
     },
     {
-      title: "Excellent Page Speed",
+      title: "Cloud Sync",
       description:
-        "Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.",
+        "Access your mind maps anytime, anywhere. Our cloud-sync feature ensures that your work is always up-to-date, whether you're on your computer, tablet, or smartphone.",
       icon: IconRocket,
-      callToAction: {
-        text: "Discover now",
-        href: "/",
-      },
+      // callToAction: {
+      //   text: "Discover now",
+      //   href: "/",
+      // },
     },
     {
-      title: "Search Engine Optimization (SEO)",
+      title: "Seamless Integration",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla.",
+        "Connect your mind maps with the tools you love. MindMaply effortlessly integrates with popular platforms, ensuring a smooth workflow. Enhance collaboration by linking your mind maps with project management tools, calendars, and more.",
       icon: IconArrowsRightLeft,
-      callToAction: {
-        text: "Discover now",
-        href: "/",
-      },
+      // callToAction: {
+      //   text: "Discover now",
+      //   href: "/",
+      // },
     },
     {
-      title: "Open to new ideas and contributions",
+      title: "Smart Auto-Layout",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla.",
+        "Let MindMaply do the heavy lifting. Our smart auto-layout feature arranges your ideas in an organized and visually appealing manner, giving your mind maps a polished and professional look with just a click.",
       icon: IconBulb,
-      callToAction: {
-        text: "Discover now",
-        href: "/",
-      },
+      // callToAction: {
+      //   text: "Discover now",
+      //   href: "/",
+      // },
     },
   ],
 };

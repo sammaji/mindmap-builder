@@ -62,8 +62,6 @@ export function Editor() {
     deleteAllNodes,
   } = useSettings();
 
-  const [isPikaVisible, setPika] = useState<boolean>(false);
-
   const isNPressed = useKeyPress("n");
   const position = useMousePosition();
 
@@ -143,7 +141,6 @@ export function Editor() {
             </DialogContent>
           </Dialog>
         </div>
-        {isPikaVisible ? <img src={ImgPikachu.src} /> : <></>}
 
         {/* <Button variant={"outline"} onClick={toggleEditMode}>
               {onEditMode ? "edit" : "read"}
